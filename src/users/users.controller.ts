@@ -12,19 +12,16 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @Get('me')
+  findMe() {
+    const userId = 2 //임시 값: 로그인 기능 개발 뒤 수정 예정
+    return this.usersService.getMyProfile(userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  @Patch('me')
+  updateMe(@Body() updateUserDto: UpdateUserDto) {
+    const userId = 2
+    return this.usersService.updateMyProfile(userId, updateUserDto);
   }
 
   @Delete(':id')
